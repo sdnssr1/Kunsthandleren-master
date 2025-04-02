@@ -25,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.kunsthandleren.ui.SystemDesign.KunsthandlerenTheme
 
@@ -187,19 +188,18 @@ fun SubjectTopAppBar(navController: NavController) {
     val canNavigateBack = navController.previousBackStackEntry != null
             && currentBackStackEntry?.destination?.route != KunstScreens.Home.route
 
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
     TopAppBar(
-        title = { Text("Kunsthandler") },
+        title = { Text("Your Screen Title") },
         navigationIcon = {
-            if (canNavigateBack) {
+            if (currentRoute != "home") {
                 IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        imageVector = Icons.Default.ArrowBack,
-                        contentDescription = "Tilbake"
-                    )
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                 }
             }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFFB2DFDB))
+        }
     )
 }
 
