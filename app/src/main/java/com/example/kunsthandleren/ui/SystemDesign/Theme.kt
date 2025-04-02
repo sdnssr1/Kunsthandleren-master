@@ -1,4 +1,4 @@
-package com.example.kunsthandleren.ui.theme
+package com.example.kunsthandleren.ui.SystemDesign
 
 import android.app.Activity
 import android.os.Build

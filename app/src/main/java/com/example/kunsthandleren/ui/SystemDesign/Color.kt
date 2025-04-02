@@ -1,4 +1,4 @@
-package com.example.kunsthandleren.ui.theme
+package com.example.kunsthandleren.ui.SystemDesign
 
 import androidx.compose.ui.graphics.Color
 

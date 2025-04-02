@@ -1,4 +1,4 @@
-package com.example.kunsthandleren.ui.theme
+package com.example.kunsthandleren.ui.SystemDesign
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
