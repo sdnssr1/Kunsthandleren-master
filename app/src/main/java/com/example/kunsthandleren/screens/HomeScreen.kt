@@ -62,7 +62,7 @@ fun PurchaseItemCard(
 }
 
 @Composable
-fun StartOrderScreen(
+fun HomeScreen(
     modifier: Modifier = Modifier,
     items: List<PurchaseItem>,
     onDeleteClicked: (Long) -> Unit,

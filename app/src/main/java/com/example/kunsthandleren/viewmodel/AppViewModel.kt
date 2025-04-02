@@ -37,6 +37,7 @@ import com.example.kunsthandleren.screens.CheckoutScreen
 import com.example.kunsthandleren.screens.FilterScreen
 import com.example.kunsthandleren.screens.ImagePreviewScreen
 import com.example.kunsthandleren.screens.ImageScreen
+import com.example.kunsthandleren.screens.HomeScreen
 import kotlin.collections.filter
 
 enum class ArtVendorScreen(@StringRes val title: Int) {
@@ -121,9 +122,10 @@ fun ArtVendorApp(
                     },
                     onPurchaseClicked = { navController.navigate(ArtVendorScreen.Purchase.name) },
                     onDeleteClicked = { photoId -> viewModel.deleteFromPurchaseItem(photoId) }
-
                 )
             }
+
+
             composable(route = ArtVendorScreen.Filter.name) {
                 FilterScreen(
                     filterContent = if (uiState.chosenFilter == Filters.ARTIST) DataSource.artists else DataSource.categories,
