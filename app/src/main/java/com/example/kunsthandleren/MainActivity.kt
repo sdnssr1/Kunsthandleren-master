@@ -1,6 +1,7 @@
 package com.example.kunsthandleren
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -84,6 +88,88 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
+
+@Composable
+fun PurchaseScreen(purchaseItemList: List<PurchaseItem>) {
+    val ctx = LocalContext.current
+    val toast = Toast.makeText(ctx, stringResource(R.string.unimplemented), Toast.LENGTH_SHORT)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.total_price),
+            fontSize = 16.sp,
+            fontWeight = W700
+        )
+        Text(text = "${calculateTotalPrice(purchaseItemList)}", fontSize = 14.sp)
+
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {toast.show()
+            }
+        ) {
+            Text(text = stringResource(R.string.pay))
+        }
+    }
+}
+
+// Add this function (or move it to where it belongs - e.g., ViewModel)
+fun calculateTotalPrice(purchaseItemList: List<PurchaseItem>): Float {
+    return purchaseItemList.sumOf { it.price.toDouble() }.toFloat()
+}
+
+@Composable
+fun PurchaseScreen(purchaseItemList: List<PurchaseItem>) {
+    val ctx = LocalContext.current
+    val toast = Toast.makeText(ctx, stringResource(R.string.unimplemented), Toast.LENGTH_SHORT)
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        Text(
+            text = stringResource(R.string.total_price),
+            fontSize = 16.sp,
+            fontWeight = W700
+        )
+        Text(text = "${calculateTotalPrice(purchaseItemList)}", fontSize = 14.sp)
+
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                toast.show()
+            }
+        ) {
+            Text(text = stringResource(R.string.pay))
+        }
+    }
+}
+
+// Add this function (or move it to where it belongs - e.g., ViewModel)
+fun calculateTotalPrice(purchaseItemList: List<PurchaseItem>): Float {
+    return purchaseItemList.sumOf { it.price.toDouble() }.toFloat()
+}
+
+@Composable
+fun <T> FilterScreen(
+    filterContent: List<T>,
+    onItemSelected: (T) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        filterContent.forEach { filter ->
+            FilterButton(filter = filter, onItemSelected = onItemSelected)
+        }
+    }
+}
 
 @Composable
 fun ListScreen(navController: NavController) {
