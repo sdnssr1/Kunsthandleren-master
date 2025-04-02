@@ -19,7 +19,19 @@
     <string name="medium">Medium</string>
     <string name="large">Stor</string>
     <string name="purchase">Til betaling</string>
-    <string name="total_price">Totalpris:</string>
     <string name="pay">Betal</string>
     <string name="unimplemented">IKKE IMPLEMENTERT</string>
+
+    <string name="home_screen">Hjem</string>
+    <string name="kunstner_screen">Kunstner</string>
+    <string name="kategori_screen">Kategori</string>
+    <string name="detail_screen">Detaljer</string>
+    <string name="cart_screen">Handlekurv</string>
+
+    <string name="welcome">Velg bilde basert på</string>
+    <string name="filter_by_artist">Kunstner</string>
+    <string name="filter_by_category">Kategori</string>
+    <string name="items_in_cart">Antall bilder valgt: </string>
+    <string name="total_price">Totalpris: </string>
+
 </resources>

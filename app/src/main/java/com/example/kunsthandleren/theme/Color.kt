@@ -1,4 +1,4 @@
-package com.example.oblig_3.ui.theme
+package com.example.kunsthandleren.theme
 
 import androidx.compose.ui.graphics.Color
 

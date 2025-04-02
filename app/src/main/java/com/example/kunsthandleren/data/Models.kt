@@ -1,4 +1,4 @@
-package com.example.kunsthandleren
+package com.example.kunsthandleren.data
 
 data class Bilde(
     val id: Int,
