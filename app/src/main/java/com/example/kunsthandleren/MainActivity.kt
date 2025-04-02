@@ -84,6 +84,7 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
+
 @Composable
 fun ListScreen(navController: NavController) {
     Column(
@@ -92,6 +93,8 @@ fun ListScreen(navController: NavController) {
             .padding(16.dp)
     ) {
         Text("Dette er ListScreen")
+        KunstnerScreen()
+        KategoriScreen()
         Spacer(Modifier.height(16.dp))
         Button(onClick = { navController.navigate(KunstScreens.Detail.route) }) {
             Text("Gå til Detalj")
@@ -117,7 +120,7 @@ fun DetailScreen() {
 }
 
 @Composable
-fun CartScreen() {
+fun CartScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -130,7 +133,7 @@ fun CartScreen() {
 }
 
 @Composable
-fun KunstnerScreen() {
+fun KunstnerScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -147,7 +150,7 @@ fun KunstnerScreen() {
 }
 
 @Composable
-fun KategoriScreen() {
+fun KategoriScreen(navController: NavController) {
     Column(modifier = Modifier.padding(16.dp)) {
         Text("Her kan du velge kategori", fontSize = 20.sp)
     }
@@ -160,8 +163,8 @@ fun KunsthandlerNavHost(navController: NavHostController) {
     NavHost(navController, startDestination = KunstScreens.Home.route) {
         composable(KunstScreens.Home.route) { HomeScreen(navController) }
         composable(KunstScreens.List.route) { ListScreen(navController) }
-        composable(KunstScreens.Detail.route) { DetailScreen() }
-        composable(KunstScreens.Cart.route) { CartScreen() }
+        composable(KunstScreens.Detail.route) { DetailScreen(navController) }
+        composable(KunstScreens.Cart.route) { CartScreen(navController) }
     }
 }
 
@@ -180,6 +183,7 @@ fun KunsthandlerenApp(modifier: Modifier = Modifier) {
         }
     }
 }
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
