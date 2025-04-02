@@ -12,12 +12,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,7 +48,9 @@ enum class KunstScreens(val route: String) {
     Home("home"),
     List("list"),
     Detail("detail"),
-    Cart("cart")
+    Cart("cart"),
+    Kunstner("kunstner"),
+    Kategori("kategori")
 }
 
 
@@ -74,10 +74,10 @@ fun HomeScreen(navController: NavController) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
-            Button(onClick = { navController.navigate(KunstScreens.List.route) }) {
+            Button(onClick = { navController.navigate(KunstScreens.Kunstner.route) }) {
                 Text("Kunstner")
             }
-            Button(onClick = { navController.navigate(KunstScreens.List.route) }) {
+            Button(onClick = { navController.navigate(KunstScreens.Kategori.route) }) {
                 Text("Kategori")
             }
         }
@@ -93,8 +93,8 @@ fun ListScreen(navController: NavController) {
             .padding(16.dp)
     ) {
         Text("Dette er ListScreen")
-        KunstnerScreen()
-        KategoriScreen()
+        KunstnerScreen(navController)
+        KategoriScreen(navController)
         Spacer(Modifier.height(16.dp))
         Button(onClick = { navController.navigate(KunstScreens.Detail.route) }) {
             Text("Gå til Detalj")
@@ -137,26 +137,29 @@ fun KunstnerScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
     ) {
-        Text("Her kan du velge kunstner", fontSize = 20.sp)
-        Spacer(modifier = Modifier.height(16.dp))
-        listOf("Kunstner A", "Kunstner B", "Kunstner C", "Kunstner D").forEach { navn ->
-            Text(navn)
-        }
+        Text("🧑‍🎨 Kunstner-skjerm", style = MaterialTheme.typography.titleLarge)
+        // Add content here
     }
 }
 
 @Composable
 fun KategoriScreen(navController: NavController) {
-    Column(modifier = Modifier.padding(16.dp)) {
-        Text("Her kan du velge kategori", fontSize = 20.sp)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text("📁 Kategori-skjerm", style = MaterialTheme.typography.titleLarge)
+        // Add content here
     }
 }
 
+
 // ============= Navigation =============
+
+
 
 @Composable
 fun KunsthandlerNavHost(navController: NavHostController) {
@@ -165,6 +168,8 @@ fun KunsthandlerNavHost(navController: NavHostController) {
         composable(KunstScreens.List.route) { ListScreen(navController) }
         composable(KunstScreens.Detail.route) { DetailScreen(navController) }
         composable(KunstScreens.Cart.route) { CartScreen(navController) }
+        composable(KunstScreens.Kunstner.route) { KunstnerScreen(navController) }
+        composable(KunstScreens.Kategori.route) { KategoriScreen(navController) }
     }
 }
 
@@ -196,11 +201,23 @@ fun SubjectTopAppBar(navController: NavController) {
     val currentRoute = navBackStackEntry?.destination?.route
 
     TopAppBar(
-        title = { Text("Your Screen Title") },
+        title = {
+            Text(
+                when (currentRoute) {
+                    "home" -> "\uD83C\uDFE0 Kunsthandler"
+                    "kunstner" -> "\uD83C\uDFA8 Velg kunstner"
+                    "kategori" -> "\uD83D\uDDC2\uFE0F Velg kategori"
+                    "pictures" -> "\uD83D\uDCDD Bilder"
+                    "detail" -> "📄 Detaljer"
+                    "cart" -> "🛒 Kunsthandler"
+                    else -> "🧭 Betaling"
+                }
+            )
+        },
         navigationIcon = {
             if (currentRoute != "home") {
                 IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Back")
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Tilbake")
                 }
             }
         }
