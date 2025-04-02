@@ -7,7 +7,7 @@ import com.example.kunsthandleren.Category
 import com.example.kunsthandleren.Filters
 import com.example.kunsthandleren.Photo
 import com.example.kunsthandleren.PurchaseItem
-import com.example.kunsthandleren.viewmodel.ArtPurchaseUiState
+import com.example.kunsthandleren.data.ArtPurchaseUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

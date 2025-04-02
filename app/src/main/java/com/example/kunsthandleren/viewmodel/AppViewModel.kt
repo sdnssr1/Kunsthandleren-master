@@ -110,9 +110,9 @@ fun ArtVendorApp(
             startDestination = ArtVendorScreen.Start.name,
             modifier = Modifier
                 .fillMaxSize()
-                .verticalScroll(rememberScrollState())
                 .padding(innerPadding)
         ) {
+            // Home Screen – Single definition for Start route.
             composable(route = ArtVendorScreen.Start.name) {
                 HomeScreen(
                     items = uiState.purchaseItemList,
@@ -125,55 +125,72 @@ fun ArtVendorApp(
                 )
             }
 
+            // Checkout Screen – Single definition for Purchase route.
+            composable(route = ArtVendorScreen.Purchase.name) {
+                CheckoutScreen(
+                    items = uiState.purchaseItemList,
+                    navController = navController,
+                    onResetCart = { uiState.purchaseItemList = emptyList() }
+                )
+            }
 
+            // Filter Screen
             composable(route = ArtVendorScreen.Filter.name) {
                 FilterScreen(
-                    filterContent = if (uiState.chosenFilter == Filters.ARTIST) DataSource.artists else DataSource.categories,
+                    filterContent = if (uiState.chosenFilter == Filters.ARTIST)
+                        DataSource.artists else DataSource.categories,
                     onNextButtonClicked = { chosen ->
                         navController.navigate(ArtVendorScreen.Images.name)
                         viewModel.updateChosenArtistOrCategory(chosen)
                     }
                 )
             }
+
+            // Images Screen
             composable(route = ArtVendorScreen.Images.name) {
                 var photos = listOf<Photo>()
                 if (uiState.chosenArtist != null) {
-                    photos =
-                        DataSource.photos.filter { photo -> photo.artist.name == uiState.chosenArtist!!.name && photo.artist.familyName == uiState.chosenArtist!!.familyName }
+                    photos = DataSource.photos.filter { photo ->
+                        photo.artist.name == uiState.chosenArtist!!.name &&
+                                photo.artist.familyName == uiState.chosenArtist!!.familyName
+                    }
                 }
                 if (uiState.chosenCategory != null) {
-                    photos =
-                        DataSource.photos.filter { photo -> photo.category == uiState.chosenCategory }
+                    photos = DataSource.photos.filter { photo ->
+                        photo.category == uiState.chosenCategory
+                    }
                 }
-                ImageScreen(photos = photos, onNextButtonClick = { photo ->
-                    navController.navigate(ArtVendorScreen.ImagePreview.name)
-                    viewModel.setTargetPhoto(photo)
-                })
+                ImageScreen(
+                    photos = photos,
+                    onNextButtonClick = { photo ->
+                        viewModel.setTargetPhoto(photo)
+                        navController.navigate(ArtVendorScreen.ImagePreview.name)
+                    }
+                )
             }
+
+            // Image Preview Screen
             composable(route = ArtVendorScreen.ImagePreview.name) {
-                ImagePreviewScreen(
-                    photo = uiState.targetPhoto,
-                    onNextButtonClicked = { purchaseItem: PurchaseItem? ->
-                        if (purchaseItem != null) {
-                            viewModel.updatePurchaseItemList(purchaseItem)
+                // Ensure uiState.targetPhoto is valid.
+                uiState.targetPhoto?.let { photo ->
+                    ImagePreviewScreen(
+                        photo = photo,
+                        onNextButtonClicked = { purchaseItem: PurchaseItem? ->
+                            if (purchaseItem != null) {
+                                viewModel.updatePurchaseItemList(purchaseItem)
+                            }
+                            navController.navigate(ArtVendorScreen.Start.name)
                         }
-                        navController.navigate(ArtVendorScreen.Start.name)
-                    })
+                    )
+                } ?: run {
+                    // Optionally handle the null case, e.g., navigate back.
+                    navController.navigate(ArtVendorScreen.Start.name)
+                }
             }
-
-            composable(route = ArtVendorScreen.Purchase.name) {
-                CheckoutScreen(items = uiState.purchaseItemList)
-            }
-            composable(route = ArtVendorScreen.Home.name) {
-                HomeScreen(navController)
-            }
-
-
         }
+
     }
 }
-
-
 @Preview(showBackground = true)
 @Composable
 fun PreviewArtVendorAppBar() {

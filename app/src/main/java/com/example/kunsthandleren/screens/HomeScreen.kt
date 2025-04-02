@@ -37,26 +37,42 @@ fun PurchaseItemCard(
     onDeleteClicked: (Long) -> Unit
 ) {
     Row(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(8.dp),
         horizontalArrangement = Arrangement.SpaceEvenly,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = purchaseItem.photo.artist.name.toString())
-            Text(text = purchaseItem.photo.artist.familyName.toString())
+        // Artist Info
+        Column(modifier = Modifier
+            .weight(1f)
+            .padding(4.dp)) {
+            Text(text = purchaseItem.photo.artist.name)
+            Text(text = purchaseItem.photo.artist.familyName)
         }
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(purchaseItem.frameType.title))
-            Text(text = stringResource(purchaseItem.size.title))
+        // Frame Type and Photo Size
+        Column(modifier = Modifier
+            .weight(1f)
+            .padding(4.dp)) {
+            Text(text = "Frame: ${purchaseItem.frameType}")
+            Text(text = "Photo: ${purchaseItem.size}")
         }
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = purchaseItem.frameSize.size.toString())
-            Text(text = purchaseItem.size.size.toString())
+        // Sizes
+        Column(modifier = Modifier
+            .weight(1f)
+            .padding(4.dp)) {
+            Text(text = "Frame Width: ${purchaseItem.frameSize.size} dp")
+            Text(text = "Photo Size: ${purchaseItem.size.size} dp")
         }
+        // Delete button
         IconButton(
             modifier = Modifier.weight(1f),
-            onClick = { onDeleteClicked(purchaseItem.photo.id) }) {
-            Icon(imageVector = Icons.Filled.Delete, contentDescription = "Delete purchase item")
+            onClick = { onDeleteClicked(purchaseItem.photo.id) }
+        ) {
+            Icon(
+                imageVector = Icons.Filled.Delete,
+                contentDescription = "Delete purchase item"
+            )
         }
     }
 }

@@ -32,16 +32,9 @@ class MainActivity : ComponentActivity() {
 
 
 enum class KunstScreens(val route: String) {
-    Home("home"),
-    List("list"),
-    Detail("detail"),
-    Cart("cart"),
     Kunstner("kunstner"),
     Kategori("kategori")
 }
-
-
-// ============= Screens =============
 
 @Composable
 fun HomeScreen(navController: NavController) {
