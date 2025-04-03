@@ -59,12 +59,10 @@ fun ImagePreviewScreen(
     photo: Photo,
     onNextButtonClicked: (PurchaseItem?) -> Unit
 ) {
-    // States for your purchase item, border thickness, and image width
     var purchaseItem by remember { mutableStateOf(PurchaseItem(photo)) }
     var borderThickness by remember { mutableStateOf(4.dp) }
     var imageWidth by remember { mutableStateOf(200.dp) }
 
-    // Painter + aspect ratio for maintaining the photo's shape
     val painter = painterResource(photo.imageResId)
     val intrinsicSize = painter.intrinsicSize
     val aspectRatio = if (intrinsicSize.height != 0f) {
@@ -74,6 +72,7 @@ fun ImagePreviewScreen(
     Column(
         modifier = modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -93,7 +92,6 @@ fun ImagePreviewScreen(
                     .aspectRatio(aspectRatio)
             )
         }
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Slider for the IMAGE WIDTH ---
@@ -104,10 +102,9 @@ fun ImagePreviewScreen(
                 imageWidth = newValue.dp
             },
             valueRange = 100f..500f,
-            steps = 0, // continuous
+            steps = 0,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Slider for the FRAME THICKNESS ---
@@ -121,7 +118,6 @@ fun ImagePreviewScreen(
             steps = 19,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Select Frame Material (if needed) ---
@@ -131,17 +127,19 @@ fun ImagePreviewScreen(
                 purchaseItem.frameType = newFrameType
             }
         )
-
         Spacer(modifier = Modifier.height(16.dp))
 
         // --- Buttons for "Add to Cart" or "Home" ---
-        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
             Button(
                 onClick = { onNextButtonClicked(null) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.teal_700),
                     contentColor = colorResource(id = R.color.white)
-                )
+                ),
+                shape = RoundedCornerShape(50)
             ) {
                 Text(text = "Home")
             }
@@ -150,7 +148,8 @@ fun ImagePreviewScreen(
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(id = R.color.teal_700),
                     contentColor = colorResource(id = R.color.white)
-                )
+                ),
+                shape = RoundedCornerShape(50)
             ) {
                 Text(text = "Add to Cart")
             }
