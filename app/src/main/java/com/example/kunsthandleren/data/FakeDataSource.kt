@@ -87,11 +87,19 @@ enum class Filters {
     CATEGORY()
 }
 
-enum class FrameType(val title: String, val extraPrice: Float, val color: Color) {
-    WOOD("Wood", 10f, Color(0xFF8B4513)),
-    METAL("Metal", 15f, Color.Gray),
-    NICE("Nice", 20f, Color(0xFFDAA520))
+enum class FrameType(
+    val title: String,
+    val extraPrice: Float,
+    val color: Color,
+    val imageRes: Int
+) {
+    WOOD("Wood", 10f, Color(0xFF8B4513), R.drawable.wood_texture),
+    METAL("Metal", 15f, Color.Gray, R.drawable.metal_texture),
+    NICE("Nice", 20f, Color(0xFFDAA520), R.drawable.nice_texture),
+    GOLD("Gold", 10f, Color.Yellow, R.drawable.gold_texture),
 }
+
+
 
 
 enum class PhotoSize(val extraPrice: Float, val size: Int = 170, @StringRes val title: Int) {

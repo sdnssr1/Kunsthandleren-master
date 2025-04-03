@@ -46,12 +46,16 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.layout.ContentScale
+
 
 @Composable
 fun ImagePreviewScreen(
@@ -60,14 +64,7 @@ fun ImagePreviewScreen(
     onNextButtonClicked: (PurchaseItem?) -> Unit
 ) {
     var purchaseItem by remember { mutableStateOf(PurchaseItem(photo)) }
-    var borderThickness by remember { mutableStateOf(4.dp) }
     var imageWidth by remember { mutableStateOf(200.dp) }
-
-    val painter = painterResource(photo.imageResId)
-    val intrinsicSize = painter.intrinsicSize
-    val aspectRatio = if (intrinsicSize.height != 0f) {
-        intrinsicSize.width / intrinsicSize.height
-    } else 1f
 
     Column(
         modifier = modifier
@@ -76,25 +73,15 @@ fun ImagePreviewScreen(
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Box with border that wraps the image
-        Box(
-            modifier = Modifier.border(
-                width = borderThickness,
-                color = purchaseItem.frameType.color
-            )
-        ) {
-            // Force the image to maintain aspect ratio, but let user pick width
-            Image(
-                painter = painter,
-                contentDescription = "${photo.title} ${photo.artist.name} ${photo.artist.familyName}",
-                modifier = Modifier
-                    .width(imageWidth)
-                    .aspectRatio(aspectRatio)
-            )
-        }
+        // Instead of drawing a colored border, use the frame image:
+        ImagePreviewWithFrame(
+            photo = photo,
+            frameType = purchaseItem.frameType,
+            imageWidth = imageWidth
+        )
         Spacer(modifier = Modifier.height(16.dp))
 
-        // --- Slider for the IMAGE WIDTH ---
+        // Slider for image width (adjusts the overall frame size)
         Text(text = "Image Width: ${imageWidth.value.toInt()} dp")
         Slider(
             value = imageWidth.value,
@@ -107,20 +94,7 @@ fun ImagePreviewScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        // --- Slider for the FRAME THICKNESS ---
-        Text(text = "Border Thickness: ${borderThickness.value.toInt()} dp")
-        Slider(
-            value = borderThickness.value,
-            onValueChange = { newValue ->
-                borderThickness = newValue.dp
-            },
-            valueRange = 1f..20f,
-            steps = 19,
-            modifier = Modifier.padding(horizontal = 16.dp)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
-        // --- Select Frame Material (if needed) ---
+        // Frame material selection
         Text(text = "Select Frame Material:")
         SelectFrameType(
             updatePurchaseItem = { newFrameType ->
@@ -129,27 +103,15 @@ fun ImagePreviewScreen(
         )
         Spacer(modifier = Modifier.height(16.dp))
 
-        // --- Buttons for "Add to Cart" or "Home" ---
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
+        // Buttons for actions
+        Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Button(
-                onClick = { onNextButtonClicked(null) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.teal_700),
-                    contentColor = colorResource(id = R.color.white)
-                ),
-                shape = RoundedCornerShape(50)
+                onClick = { onNextButtonClicked(null) }
             ) {
                 Text(text = "Home")
             }
             Button(
-                onClick = { onNextButtonClicked(purchaseItem) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.teal_700),
-                    contentColor = colorResource(id = R.color.white)
-                ),
-                shape = RoundedCornerShape(50)
+                onClick = { onNextButtonClicked(purchaseItem) }
             ) {
                 Text(text = "Add to Cart")
             }
@@ -162,13 +124,30 @@ fun ImagePreviewScreen(
 @Composable
 fun SelectFrameType(
     modifier: Modifier = Modifier,
-    frameTypes: List<FrameType> = listOf(FrameType.WOOD, FrameType.METAL, FrameType.NICE),
+    frameTypes: List<FrameType> = listOf(FrameType.WOOD, FrameType.METAL, FrameType.NICE, FrameType.GOLD),
     updatePurchaseItem: (FrameType) -> Unit
 ) {
     var selected by remember { mutableStateOf(frameTypes.first()) }
-    Column(modifier = modifier) {
-        frameTypes.forEach { frameType ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
+    LazyRow(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(frameTypes) { frameType ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .clickable {
+                        selected = frameType
+                        updatePurchaseItem(frameType)
+                    }
+                    .padding(8.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = frameType.imageRes),
+                    contentDescription = frameType.title,
+                    modifier = Modifier.size(64.dp)
+                )
+                Text(text = frameType.title)
                 RadioButton(
                     selected = frameType == selected,
                     onClick = {
@@ -176,36 +155,44 @@ fun SelectFrameType(
                         updatePurchaseItem(frameType)
                     }
                 )
-                Text(text = frameType.name)
             }
         }
     }
 }
-
 
 
 @Composable
-fun SelectPhotoSize(
-    modifier: Modifier = Modifier,
-    sizes: List<PhotoSize> = DataSource.photoSizes,
-    updatePurchaseItem: (PhotoSize) -> Unit
+fun ImagePreviewWithFrame(
+    photo: Photo,
+    frameType: FrameType,
+    imageWidth: Dp
 ) {
-    var selected by remember { mutableStateOf(sizes.first()) }
-    Column(modifier = modifier) {
-        sizes.forEach { size: PhotoSize ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = size == selected,
-                    onClick = {
-                        selected = size
-                        updatePurchaseItem(size)
-                    }
-                )
-                Text(text = stringResource(id = size.title))
-            }
-        }
+    // Obtain the painter for the photo and frame
+    val photoPainter = painterResource(photo.imageResId)
+    val framePainter = painterResource(frameType.imageRes)
+
+    // Assume the frame image is designed to be stretched, for example a 9-patch or PNG with transparent center.
+    Box(modifier = Modifier.size(imageWidth)) {
+        // Draw the frame image as the background. It fills the entire box.
+        Image(
+            painter = framePainter,
+            contentDescription = "Frame: ${frameType.title}",
+            modifier = Modifier.matchParentSize(),
+            contentScale = ContentScale.FillBounds
+        )
+        // Draw the photo image centered inside the frame.
+        // Adjust the factor (0.8f below) so the photo fits nicely within the frame.
+        Image(
+            painter = photoPainter,
+            contentDescription = "${photo.title} by ${photo.artist.name}",
+            modifier = Modifier
+                .size(imageWidth * 0.8f)
+                .align(Alignment.Center),
+            contentScale = ContentScale.Crop
+        )
     }
 }
+
 
 
 @Composable
@@ -239,11 +226,8 @@ fun SelectFrameSize(
             value = sliderValue,
             onValueChange = { newValue ->
                 sliderValue = newValue
-                // Pick the closest available frame size.
                 val closest = getClosestFrameSize(newValue)
                 updatePurchaseItem(closest)
-                // Also, update the overall image scale.
-                // (You can apply a multiplier here if you want the image size to differ from the frame width.)
                 onImageScaleChange(newValue.dp)
             },
             valueRange = minValue..maxValue,
