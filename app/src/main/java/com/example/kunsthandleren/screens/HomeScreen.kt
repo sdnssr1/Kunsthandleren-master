@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import kotlin.collections.count
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.example.kunsthandleren.Filters
 import com.example.kunsthandleren.PurchaseItem
 import com.example.kunsthandleren.R
@@ -100,10 +101,14 @@ fun HomeScreen(
 
         Text(
             text = "Velg bilde basert på",
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp
+
         )
 
         Spacer(modifier = Modifier.height(24.dp))
+
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -112,61 +117,71 @@ fun HomeScreen(
             Button(
                 onClick = { onNextButtonClicked(Filters.ARTIST) },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.teal_700),
-                    contentColor = colorResource(id = R.color.white)
+                    containerColor = Color.Black,
+                    contentColor = Color.White,
                 ),
                 shape = RoundedCornerShape(50)
             ) {
                 Text(
-                    text="Kunstner",
+                    text = "Kunstner",
                     style = MaterialTheme.typography.labelLarge.copy(
                         fontFamily = IBMVGAFontFamily,
-                        fontWeight = FontWeight.Bold)
-                )
-            }
-
-            Button(
-                onClick = { onNextButtonClicked(purchaseItem) },
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Black, // Button background
-                    contentColor = Color.White    // Button text color
-                ),
-                shape = RoundedCornerShape(50),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp)
-            ) {
-                Text(
-                    text = "Buy Now",
-                    style = MaterialTheme.typography.labelLarge.copy(
-                        fontFamily = IBMVGAFontFamily,
-                        fontWeight = FontWeight.Bold
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp
                     )
                 )
             }
-
+            Button(
+                onClick = { onNextButtonClicked(Filters.CATEGORY) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black,
+                    contentColor = Color.White
+                ),
+                shape = RoundedCornerShape(50)
+            ) {
+                Text(
+                    text = "Kategori",
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontFamily = IBMVGAFontFamily,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 24.sp
+                    )
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Text("Antall bilder valgt: ${items.count()}")
-        Text("Totalpris: $totalCost")
+        Text("Antall bilder valgt: ${items.count()}",
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp
+        )
+        Text("Totalpris: $totalCost",
+            fontWeight = FontWeight.Bold,
+            fontSize = 32.sp
+        )
 
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = { onNextButtonClicked(Filters.CATEGORY) },
+            onClick = { onPurchaseClicked() },
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.teal_700),
-                contentColor = colorResource(id = R.color.white)
+                containerColor = Color.Black,
+                contentColor = Color.White
             ),
-            shape = RoundedCornerShape(50)
+            shape = RoundedCornerShape(50),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
         ) {
             Text(
-                text = "Kategori",
+                text = "Buy Now",
                 style = MaterialTheme.typography.labelLarge.copy(
                     fontFamily = IBMVGAFontFamily,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 24.sp
+
+
                 )
             )
         }

@@ -43,7 +43,7 @@ fun <T> CategoryButton(
             .padding(vertical = 4.dp)
             .clickable { onNextButtonClicked(filter) },
         shape = RoundedCornerShape(12.dp),
-        color = colorResource(id = android.R.color.darker_gray).copy(alpha = 0.1f), // lys bakgrunn
+        color = Color.Black, // Updated to black background
         shadowElevation = 2.dp
     ) {
         Column(
@@ -57,27 +57,38 @@ fun <T> CategoryButton(
                     Text(
                         text = filter.name,
                         fontSize = 16.sp,
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = IBMVGAFontFamily
+                        )
                     )
                     Text(
                         text = filter.familyName,
-                        color = Color.DarkGray,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = IBMVGAFontFamily
+                        )
                     )
                 }
                 is Category -> {
                     Text(
                         text = filter.name,
-                        fontSize = 16.sp,
-                        color = Color.Black,
-                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
+                        fontSize = 24.sp,
+                        color = Color.White,
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = IBMVGAFontFamily
+                        )
                     )
                 }
                 else -> {
                     Text(
                         text = "Unrecognized Filter Type",
-                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
+                        fontSize = 16.sp,
+                        color = Color.White, // Updated text color to white
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = IBMVGAFontFamily
+                        )
                     )
                 }
             }

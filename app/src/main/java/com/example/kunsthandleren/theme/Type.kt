@@ -1,6 +1,5 @@
 // In Theme.kt or Typography.kt
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
+
 import androidx.compose.ui.text.TextStyle
 
 import androidx.compose.ui.unit.sp
@@ -27,8 +26,7 @@ val IBMVGAFontFamily = FontFamily(
 private val DarkColorScheme = darkColorScheme(
     primary = Color(0xFF000000),
     onPrimary = Color.White,
-    // etc...
-)
+    )
 val MyTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = IBMVGAFontFamily,
