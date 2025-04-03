@@ -1,5 +1,6 @@
 package com.example.kunsthandleren.screens
 
+import IBMVGAFontFamily
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,10 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import kotlin.collections.count
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import com.example.kunsthandleren.Filters
 import com.example.kunsthandleren.PurchaseItem
 import com.example.kunsthandleren.R
@@ -97,7 +100,7 @@ fun HomeScreen(
 
         Text(
             text = "Velg bilde basert på",
-            style = MaterialTheme.typography.titleLarge
+            style = MaterialTheme.typography.bodyLarge
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -114,19 +117,34 @@ fun HomeScreen(
                 ),
                 shape = RoundedCornerShape(50)
             ) {
-                Text("Kunstner")
+                Text(
+                    text="Kunstner",
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontFamily = IBMVGAFontFamily,
+                        fontWeight = FontWeight.Bold)
+                )
             }
 
             Button(
-                onClick = { onNextButtonClicked(Filters.CATEGORY) },
+                onClick = { onNextButtonClicked(purchaseItem) },
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = colorResource(id = R.color.teal_700),
-                    contentColor = colorResource(id = R.color.white)
+                    containerColor = Color.Black, // Button background
+                    contentColor = Color.White    // Button text color
                 ),
-                shape = RoundedCornerShape(50)
+                shape = RoundedCornerShape(50),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp)
             ) {
-                Text("Kategori")
+                Text(
+                    text = "Buy Now",
+                    style = MaterialTheme.typography.labelLarge.copy(
+                        fontFamily = IBMVGAFontFamily,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
             }
+
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -137,17 +155,21 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(32.dp))
 
         Button(
-            onClick = onPurchaseClicked,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp),
+            onClick = { onNextButtonClicked(Filters.CATEGORY) },
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id = R.color.teal_700),
                 contentColor = colorResource(id = R.color.white)
             ),
             shape = RoundedCornerShape(50)
         ) {
-            Text("Til betaling")
+            Text(
+                text = "Kategori",
+                style = MaterialTheme.typography.labelLarge.copy(
+                    fontFamily = IBMVGAFontFamily,
+                    fontWeight = FontWeight.Bold
+                )
+            )
         }
+
     }
 }

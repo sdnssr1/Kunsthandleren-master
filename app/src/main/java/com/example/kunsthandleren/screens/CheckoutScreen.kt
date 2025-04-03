@@ -6,15 +6,14 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -45,8 +44,10 @@ fun CheckoutScreen(
             text = "${stringResource(id = R.string.total_price)}: $total",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
+            color = Color.White, // Set the text color here
             modifier = Modifier.padding(bottom = 4.dp)
         )
+
 
         Button(
             onClick = {
@@ -60,18 +61,16 @@ fun CheckoutScreen(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.teal_700),
-                contentColor = colorResource(id = R.color.white)
+                containerColor = Color(0xFF2196F3),
+                contentColor = Color.White
             ),
             shape = RoundedCornerShape(50)
         ) {
             Text(text = stringResource(id = R.string.pay))
         }
     }
+
 }
-
-
-@Preview(showBackground = true)
 @Composable
 fun PreviewPurchaseScreen() {
     CheckoutScreen(

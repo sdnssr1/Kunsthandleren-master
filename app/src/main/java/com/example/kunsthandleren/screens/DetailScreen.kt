@@ -23,19 +23,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.kunsthandleren.DataSource
 import com.example.kunsthandleren.FrameSize
 import com.example.kunsthandleren.FrameType
 import com.example.kunsthandleren.Photo
-import com.example.kunsthandleren.PhotoSize
 import com.example.kunsthandleren.PurchaseItem
-import com.example.kunsthandleren.R
-import com.example.kunsthandleren.testPhoto
+
 import kotlin.math.abs
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -98,7 +94,7 @@ fun ImagePreviewScreen(
         Text(text = "Select Frame Material:")
         SelectFrameType(
             updatePurchaseItem = { newFrameType ->
-                purchaseItem.frameType = newFrameType
+                purchaseItem = purchaseItem.copy(frameType = newFrameType)
             }
         )
         Spacer(modifier = Modifier.height(16.dp))
@@ -106,14 +102,28 @@ fun ImagePreviewScreen(
         // Buttons for actions
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Button(
-                onClick = { onNextButtonClicked(null) }
+                onClick = { onNextButtonClicked(null) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF0000AA),
+                    contentColor = Color.White
+                )
             ) {
-                Text(text = "Home")
+                Text(
+                    text = "Home",
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
             Button(
-                onClick = { onNextButtonClicked(purchaseItem) }
+                onClick = { onNextButtonClicked(purchaseItem) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF0000AA), // Deep blue background
+                    contentColor = Color.White          // White text
+                )
             ) {
-                Text(text = "Add to Cart")
+                Text(
+                    text = "Add to Cart",
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
         }
     }

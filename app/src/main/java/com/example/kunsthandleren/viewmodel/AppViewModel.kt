@@ -1,5 +1,6 @@
 package com.example.kunsthandleren.viewmodel
 
+import IBMVGAFontFamily
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -14,12 +15,14 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -65,24 +68,31 @@ fun ArtVendorAppBar(
 ) {
     TopAppBar(
         modifier = modifier,
-        title = { Text(stringResource(currentScreen.title)) },
+        title = {
+            Text(
+                text = stringResource(currentScreen.title),
+                // Use your custom font by copying the titleLarge style
+                style = MaterialTheme.typography.titleLarge.copy(fontFamily = IBMVGAFontFamily),
+                color = Color.White // Explicitly set the header text color to white
+            )
+        },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = colorResource(id = R.color.teal_200),
-            titleContentColor = colorResource(id = R.color.black)
+            containerColor = Color(0xFF0000AA), // Deep blue background
+            titleContentColor = Color.White
         ),
         navigationIcon = {
             if (canNavigateBack) {
                 IconButton(onClick = navigateUp) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = stringResource(R.string.back_button)
+                        contentDescription = stringResource(R.string.back_button),
+                        tint = Color.White // Back icon white
                     )
                 }
             }
         }
     )
 }
-
 
 @Composable
 fun ArtVendorApp(

@@ -12,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -54,12 +55,26 @@ fun HomeScreen(navController: NavController) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.padding(horizontal = 16.dp)
         ) {
-            Button(onClick = { navController.navigate(KunstScreens.Kunstner.route) }) {
+            Button(
+                onClick = { navController.navigate(KunstScreens.Kunstner.route) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF0000AA), // Deep blue background
+                    contentColor = Color.White          // White text
+                )
+            ) {
                 Text("Kunstner")
             }
-            Button(onClick = { navController.navigate(KunstScreens.Kategori.route) }) {
+
+            Button(
+                onClick = { navController.navigate(KunstScreens.Kategori.route) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF0000AA), // Deep blue background
+                    contentColor = Color.White          // White text
+                )
+            ) {
                 Text("Kategori")
             }
+
         }
     }
 }

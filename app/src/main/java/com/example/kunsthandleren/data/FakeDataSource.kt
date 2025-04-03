@@ -119,12 +119,13 @@ val testArtist = Artist(-1L)
 val testPhoto = Photo(id= -1L,imageResId=R.drawable.ic_launcher_background, artist=testArtist, category=Category.PAINT)
 
 data class PurchaseItem(
-    var photo: Photo = testPhoto,
-    var size: PhotoSize = PhotoSize.SMALL,
-    var frameType: FrameType = FrameType.WOOD,
-    var frameSize: FrameSize = FrameSize.SMALL
+    val photo: Photo = testPhoto,
+    val size: PhotoSize = PhotoSize.SMALL,
+    val frameType: FrameType = FrameType.WOOD,
+    val frameSize: FrameSize = FrameSize.SMALL
 ) {
     fun getCost(): Float {
         return photo.price + size.extraPrice + frameType.extraPrice + frameSize.extraPrice
     }
 }
+

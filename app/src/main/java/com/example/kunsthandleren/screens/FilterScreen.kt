@@ -1,13 +1,13 @@
 package com.example.kunsthandleren.screens
 
-import android.util.Log
+import IBMVGAFontFamily
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kunsthandleren.Artist
@@ -29,7 +28,6 @@ fun <T> FilterScreen(modifier: Modifier = Modifier, onNextButtonClicked: (T)->Un
         filterContent.map { filter ->
             CategoryButton(filter = filter, onNextButtonClicked = onNextButtonClicked)
         }
-
     }
 }
 
@@ -57,26 +55,30 @@ fun <T> CategoryButton(
             when (filter) {
                 is Artist -> {
                     Text(
-                        fontSize = 16.sp,
                         text = filter.name,
-                        color = Color.Black
+                        fontSize = 16.sp,
+                        color = Color.Black,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
                     )
                     Text(
                         text = filter.familyName,
-                        color = Color.DarkGray
+                        color = Color.DarkGray,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
                     )
                 }
-
                 is Category -> {
                     Text(
                         text = filter.name,
                         fontSize = 16.sp,
-                        color = Color.Black
+                        color = Color.Black,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
                     )
                 }
-
                 else -> {
-                    Text(text = "Unrecognized Filter Type")
+                    Text(
+                        text = "Unrecognized Filter Type",
+                        style = MaterialTheme.typography.bodyLarge.copy(fontFamily = IBMVGAFontFamily)
+                    )
                 }
             }
         }
@@ -85,8 +87,3 @@ fun <T> CategoryButton(
 
 
 
-@Preview(showBackground = true)
-@Composable
-fun FilterPreview() {
-    FilterScreen(filterContent = DataSource.artists, onNextButtonClicked = {})
-}
