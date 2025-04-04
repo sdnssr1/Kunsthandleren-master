@@ -14,13 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kunsthandleren.Artist
 import com.example.kunsthandleren.Category
-import com.example.kunsthandleren.DataSource
-import kotlin.collections.map
 
 @Composable
 fun <T> FilterScreen(modifier: Modifier = Modifier, onNextButtonClicked: (T)->Unit, filterContent: List<T> = listOf()) {
@@ -43,33 +40,35 @@ fun <T> CategoryButton(
             .padding(vertical = 4.dp)
             .clickable { onNextButtonClicked(filter) },
         shape = RoundedCornerShape(12.dp),
-        color = Color.Black, // Updated to black background
+        color = Color.Black,
         shadowElevation = 2.dp
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            horizontalAlignment = Alignment.Start
+                .padding(horizontal = 12.dp, vertical = 12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             when (filter) {
                 is Artist -> {
-                    Text(
-                        text = filter.name,
-                        fontSize = 16.sp,
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge.copy(
-                            fontFamily = IBMVGAFontFamily
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = filter.name,
+                            fontSize = 32.sp,
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontFamily = IBMVGAFontFamily
+                            )
                         )
-                    )
-                    Text(
-                        text = filter.familyName,
-                        fontSize = 24.sp,
-                        color = Color.White,
-                        style = MaterialTheme.typography.bodyLarge.copy(
-                            fontFamily = IBMVGAFontFamily
+                        Text(
+                            text = filter.familyName,
+                            fontSize = 64.sp,
+                            color = Color.White,
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                fontFamily = IBMVGAFontFamily
+                            )
                         )
-                    )
+                    }
                 }
                 is Category -> {
                     Text(

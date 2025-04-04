@@ -1,6 +1,9 @@
 package com.example.kunsthandleren.viewmodel
 
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.example.kunsthandleren.Artist
 import com.example.kunsthandleren.Category
@@ -15,8 +18,16 @@ import kotlinx.coroutines.flow.update
 
 class ArtVendorViewModel: ViewModel() {
 
+
     private val _uiState = MutableStateFlow(ArtPurchaseUiState())
     val uiState: StateFlow<ArtPurchaseUiState> = _uiState.asStateFlow()
+
+    var selectedWidthInCm by mutableStateOf(0f)
+        private set
+
+    fun updateSelectedWidthInCm(value: Float) {
+        selectedWidthInCm = value
+    }
 
     fun updatePurchaseItemList(purchaseItem: PurchaseItem) {
         _uiState.update {

@@ -3,7 +3,6 @@ package com.example.kunsthandleren
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
-import com.example.kunsthandleren.DataSource.artists
 
 object DataSource {
     val frames: List<FrameType> = FrameType.values().toList()
@@ -17,44 +16,44 @@ object DataSource {
         Artist(6L, "Oskar", "Hansen"),
     )
     val naturePhotos: List<Photo> = listOf(
-        Photo(1L, "Nature Image 1", R.drawable.image1, artists[1], Category.NATURE, 100f),
-        Photo(2L, "Nature Image 2", R.drawable.image2, artists[1], Category.NATURE, 110f),
-        Photo(3L, "Nature Image 3", R.drawable.image3, artists[1], Category.NATURE, 120f),
-        Photo(4L, "Nature Image 4", R.drawable.image4, artists[1], Category.NATURE, 130f),
-        Photo(5L, "Nature Image 5", R.drawable.image5, artists[1], Category.NATURE, 140f),
-        Photo(6L, "Nature Image 6", R.drawable.image6, artists[1], Category.NATURE, 150f),
-        Photo(7L, "Nature Image 7", R.drawable.image7, artists[1], Category.NATURE, 160f),
-        Photo(8L, "Nature Image 8", R.drawable.image8, artists[1], Category.NATURE, 170f),
-        Photo(9L, "Nature Image 9", R.drawable.image9, artists[1], Category.NATURE, 180f)
+        Photo(1L, "Fjell i Tåke", R.drawable.image1, artists[1], Category.NATURE, 100f),
+        Photo(2L, "Båttur", R.drawable.image2, artists[1], Category.NATURE, 110f),
+        Photo(3L, "Soloppgang", R.drawable.image3, artists[1], Category.NATURE, 120f),
+        Photo(4L, "Innsjøen 4", R.drawable.image4, artists[1], Category.NATURE, 130f),
+        Photo(5L, "Elv", R.drawable.image5, artists[1], Category.NATURE, 140f),
+        Photo(6L, "Tåke", R.drawable.image6, artists[1], Category.NATURE, 150f),
+        Photo(7L, "Skog", R.drawable.image7, artists[1], Category.NATURE, 160f),
+        Photo(8L, "Stille Elv", R.drawable.image8, artists[1], Category.NATURE, 170f),
+        Photo(9L, "Nordlys", R.drawable.image9, artists[1], Category.NATURE, 180f)
     )
     val superHeroPhotos: List<Photo> = listOf(
-        Photo(1L, "Nature Image 1", R.drawable.android_superhero1, artists[2], Category.FOOD, 100f),
-        Photo(2L, "Nature Image 2", R.drawable.android_superhero2, artists[2], Category.FOOD, 110f),
-        Photo(3L, "Nature Image 3", R.drawable.android_superhero3, artists[2], Category.FOOD, 120f),
-        Photo(4L, "Nature Image 4", R.drawable.android_superhero4, artists[2], Category.FOOD, 130f),
-        Photo(5L, "Nature Image 5", R.drawable.android_superhero5, artists[2], Category.FOOD, 140f),
-        Photo(6L, "Nature Image 6", R.drawable.android_superhero6, artists[2], Category.FOOD, 150f)
+        Photo(1L, "BLITZ", R.drawable.android_superhero1, artists[2], Category.SUPERHERO, 100f),
+        Photo(2L, "SKJOLD", R.drawable.android_superhero2, artists[2], Category.SUPERHERO, 110f),
+        Photo(3L, "FLAMME", R.drawable.android_superhero3, artists[2], Category.SUPERHERO, 120f),
+        Photo(4L, "SKYGGE", R.drawable.android_superhero4, artists[2], Category.SUPERHERO, 130f),
+        Photo(5L, "LYN", R.drawable.android_superhero5, artists[2], Category.SUPERHERO, 140f),
+        Photo(6L, "NOVA", R.drawable.android_superhero6, artists[2], Category.SUPERHERO, 150f)
     )
     val animalPhotos: List<Photo> = listOf(
-        Photo(4L, "animal Image 1", R.drawable.faye, artists[3], Category.DYR, 130f),
-        Photo(5L, "animal Image 2", R.drawable.frankie, artists[3], Category.DYR, 140f),
-        Photo(6L, "animal Image 3", R.drawable.koda, artists[3], Category.DYR, 150f),
-        Photo(7L, "animal Image 4", R.drawable.leroy, artists[3], Category.DYR, 150f),
-        Photo(8L, "animal Image 5", R.drawable.lola, artists[3], Category.DYR, 150f),
-        Photo(9L, "animal Image 6", R.drawable.moana, artists[3], Category.DYR, 150f),
-        Photo(10L, "animal Image 7", R.drawable.nox, artists[3], Category.DYR, 150f),
-        Photo(11L, "animal Image 8", R.drawable.tzeitel, artists[3], Category.DYR, 150f)
+        Photo(4L, "Faye", R.drawable.faye, artists[3], Category.DOG, 130f),
+        Photo(5L, "Frankie", R.drawable.frankie, artists[3], Category.DOG, 140f),
+        Photo(6L, "Koda", R.drawable.koda, artists[3], Category.DOG, 150f),
+        Photo(7L, "Leroy", R.drawable.leroy, artists[3], Category.DOG, 150f),
+        Photo(8L, "Lola", R.drawable.lola, artists[3], Category.DOG, 150f),
+        Photo(9L, "Mona", R.drawable.moana, artists[3], Category.DOG, 150f),
+        Photo(10L, "Nox", R.drawable.nox, artists[3], Category.DOG, 150f),
+        Photo(11L, "Tzeitel", R.drawable.tzeitel, artists[3], Category.DOG, 150f)
     )
     val paintingPhotos: List<Photo> = listOf(
-        Photo(4L, "Nature Image 4", R.drawable.paint1, artists[0], Category.PAINT, 130f),
-        Photo(5L, "Nature Image 5", R.drawable.paint2, artists[0], Category.PAINT, 140f),
-        Photo(6L, "Nature Image 6", R.drawable.paint3, artists[0], Category.PAINT, 150f),
-        Photo(7L, "Nature Image 6", R.drawable.paint4, artists[0], Category.PAINT, 150f),
-        Photo(8L, "Nature Image 6", R.drawable.paint5, artists[0], Category.PAINT, 150f),
-        Photo(9L, "Nature Image 6", R.drawable.paint6, artists[0], Category.PAINT, 150f),
-        Photo(10L, "Nature Image 6", R.drawable.paint7, artists[0], Category.PAINT, 150f),
-        Photo(11L, "Nature Image 6", R.drawable.paint8, artists[0], Category.PAINT, 150f),
-        Photo(11L, "Nature Image 6", R.drawable.paint9, artists[0], Category.PAINT, 150f)
+        Photo(4L, "Blå Gitarkamerat", R.drawable.paint1, artists[0], Category.PAINT, 130f),
+        Photo(5L, "Løvenes Rike", R.drawable.paint2, artists[0], Category.PAINT, 140f),
+        Photo(6L, "Kampen", R.drawable.paint3, artists[0], Category.PAINT, 150f),
+        Photo(7L, "Heltemot", R.drawable.paint4, artists[0], Category.PAINT, 150f),
+        Photo(8L, "Dommedag", R.drawable.paint5, artists[0], Category.PAINT, 150f),
+        Photo(9L, "Flammeoffer", R.drawable.paint6, artists[0], Category.PAINT, 150f),
+        Photo(10L, "Løvens Hule", R.drawable.paint7, artists[0], Category.PAINT, 150f),
+        Photo(11L, "Skjebnestund", R.drawable.paint8, artists[0], Category.PAINT, 150f),
+        Photo(11L, "Ruiner", R.drawable.paint9, artists[0], Category.PAINT, 150f)
     )
     val photos: List<Photo> = naturePhotos + superHeroPhotos + animalPhotos + paintingPhotos
 }
@@ -77,8 +76,8 @@ data class Artist(
 
 enum class Category {
     NATURE(),
-    FOOD(),
-    DYR(),
+    SUPERHERO(),
+    DOG(),
     PAINT()
 }
 
