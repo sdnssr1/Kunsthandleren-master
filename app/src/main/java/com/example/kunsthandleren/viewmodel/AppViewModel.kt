@@ -2,10 +2,10 @@ package com.example.kunsthandleren.viewmodel
 
 import IBMVGAFontFamily
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -23,9 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -34,6 +32,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.kunsthandleren.DataSource
 import com.example.kunsthandleren.Filters
+import com.example.kunsthandleren.HomeScreen
 import com.example.kunsthandleren.Photo
 import com.example.kunsthandleren.PurchaseItem
 import com.example.kunsthandleren.R
@@ -70,22 +69,15 @@ fun ArtVendorAppBar(
     TopAppBar(
         modifier = modifier,
         title = {
-            Box(modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    text = stringResource(currentScreen.title),
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontFamily = IBMVGAFontFamily,
-                        fontSize = 32.sp,
-                        fontWeight = FontWeight.Bold
-                    ),
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+            Text(
+                text = stringResource(currentScreen.title),
+                // Use your custom font by copying the titleLarge style
+                style = MaterialTheme.typography.titleLarge.copy(fontFamily = IBMVGAFontFamily),
+                color = Color.White // Explicitly set the header text color to white
+            )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = Color(0xFF0000AA),
+            containerColor = Color(0xFF0000AA), // Deep blue background
             titleContentColor = Color.White
         ),
         navigationIcon = {
@@ -130,7 +122,7 @@ fun ArtVendorApp(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            // Home Screen
+            // Home Screen – Single definition for Start route.
             composable(route = ArtVendorScreen.Start.name) {
                 HomeScreen(
                     items = uiState.purchaseItemList,
@@ -138,15 +130,15 @@ fun ArtVendorApp(
                         navController.navigate(ArtVendorScreen.Filter.name)
                         viewModel.updateChosenFilter(filter)
                     },
-                    onPurchaseClicked = { navController.navigate(ArtVendorScreen.Purchase.name) }
+                    onPurchaseClicked = { navController.navigate(ArtVendorScreen.Purchase.name) },
+                    onDeleteClicked = { photoId -> viewModel.deleteFromPurchaseItem(photoId) }
                 )
             }
 
-            // Checkout Screen
+            // Checkout Screen – Single definition for Purchase route.
             composable(route = ArtVendorScreen.Purchase.name) {
                 CheckoutScreen(
                     items = uiState.purchaseItemList,
-                    widthInCm = viewModel.selectedWidthInCm,
                     navController = navController,
                     onResetCart = { uiState.purchaseItemList = emptyList() }
                 )
@@ -193,7 +185,6 @@ fun ArtVendorApp(
                 uiState.targetPhoto?.let { photo ->
                     ImagePreviewScreen(
                         photo = photo,
-                        viewModel = viewModel,
                         onNextButtonClicked = { purchaseItem: PurchaseItem? ->
                             if (purchaseItem != null) {
                                 viewModel.updatePurchaseItemList(purchaseItem)

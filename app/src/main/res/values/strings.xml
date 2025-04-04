@@ -11,7 +11,7 @@
     <!-- Navigation & Skjermtitler -->
     <string name="detail_screen">Detaljer</string>
     <string name="back_button">Tilbake</string>
-    <string name="filter_screen">Artister</string>
+    <string name="filter_screen">Velg filter</string>
     <string name="images_screen">Bilder</string>
     <string name="image_preview_screen">Detaljer</string>
     <string name="cart_screen">Handlekurv</string>
