@@ -81,7 +81,7 @@ fun CheckoutScreen(
                             fontFamily = IBMVGAFontFamily
                         )
                     ) {
-                        append(" Ramme(r)")
+                        append(" bilde(r)")
                     }
                 },
                 modifier = Modifier.padding(bottom = 4.dp)
@@ -95,7 +95,7 @@ fun CheckoutScreen(
                             fontFamily = IBMVGAFontFamily
                         )
                     ) {
-                        append("Total pris: ")
+                        append("Totalpris: ")
                     }
                     withStyle(
                         SpanStyle(
@@ -105,7 +105,7 @@ fun CheckoutScreen(
                             fontFamily = IBMVGAFontFamily
                         )
                     ) {
-                        append("%.0f".format(total))
+                        append("${"%.0f".format(total)}")
                     }
                     withStyle(
                         SpanStyle(
@@ -123,10 +123,10 @@ fun CheckoutScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         items.forEachIndexed { index, item ->
-            item.photo.title
-            "${item.photo.artist.name} ${item.photo.artist.familyName}"
-            item.frameType.title
-            "${item.size.size.toInt()} cm"
+            val title = item.photo.title
+            val artist = "${item.photo.artist.name} ${item.photo.artist.familyName}"
+            val frame = item.frameType.title
+            val size = "${item.size.size.toInt()} cm"
 
             Text(
                 buildAnnotatedString {
@@ -150,7 +150,7 @@ fun CheckoutScreen(
                             color = Color(0xFF006400)
                         )
                     ) {
-                        append(item.photo.title)
+                        append("${item.photo.title}")
                         append("\n")
 
                     }
@@ -204,7 +204,7 @@ fun CheckoutScreen(
                             color = Color.Red
                             )
                     ) {
-                        append(item.frameType.title)
+                        append("${item.frameType.title}")
                         append("\n")
 
                     }
@@ -216,7 +216,7 @@ fun CheckoutScreen(
                             color = Color.Black
                         )
                     ) {
-                        append("   Artist: ")
+                        append("  Artist: ")
                     }
                     withStyle(
                         SpanStyle(
@@ -226,7 +226,7 @@ fun CheckoutScreen(
                             color = Color.DarkGray
                         )
                     ) {
-                        append(item.photo.artist.name)
+                        append("${item.photo.artist.name}")
                         append(" ${item.photo.artist.familyName}")
                     }
                     Column(

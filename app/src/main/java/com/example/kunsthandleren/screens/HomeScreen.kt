@@ -107,15 +107,11 @@ fun HomeScreen(
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
                     )) {
-                    append("Antall rammer valgt: ")
+                    append("Handle kurv: ")
                 }
                 withStyle (SpanStyle(color = Color.Red, fontSize = 24.sp))
                 {
                     append("${items.count()}")
-                }
-                withStyle (SpanStyle(color = Black, fontSize = 24.sp))
-                {
-                    append(" Ramme(r)")
                 }
             },
         )
