@@ -100,6 +100,7 @@ fun ImagePreviewScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         // Buttons for actions
+<<<<<<< HEAD
         Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
             Button(
                 onClick = { onNextButtonClicked(null) },
@@ -113,6 +114,9 @@ fun ImagePreviewScreen(
                     style = MaterialTheme.typography.titleLarge
                 )
             }
+=======
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+>>>>>>> main
             Button(
                 onClick = { onNextButtonClicked(purchaseItem) },
                 colors = ButtonDefaults.buttonColors(
@@ -121,8 +125,20 @@ fun ImagePreviewScreen(
                 )
             ) {
                 Text(
-                    text = "Add to Cart",
+                    text = "Legg i handlekurv",
                     style = MaterialTheme.typography.titleLarge
+                )
+            }
+            Button(
+                onClick = { onNextButtonClicked(null) },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black,
+                    contentColor = Color.White,
+                )
+            ) {
+                Text(
+                    text = "Hjem",
+                    style = MaterialTheme.typography.titleLarge,
                 )
             }
         }

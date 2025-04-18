@@ -40,6 +40,7 @@ fun CheckoutScreen(
             .fillMaxSize()
             .padding(horizontal = 12.dp, vertical = 8.dp)
     ) {
+<<<<<<< HEAD
         Text(
             text = "${stringResource(id = R.string.total_price)}: $total",
             fontSize = 18.sp,
@@ -48,6 +49,220 @@ fun CheckoutScreen(
             modifier = Modifier.padding(bottom = 4.dp)
         )
 
+=======
+        // 🧾 Summary Section
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 16.dp)
+        ) {
+            Text(
+                buildAnnotatedString {
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("Du har valgt ")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Blue,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("${items.size}")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.Black,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append(" bilde(r)")
+                    }
+                },
+                modifier = Modifier.padding(bottom = 4.dp)
+            )
+            Text(
+                buildAnnotatedString {
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("Totalpris: ")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color(0xFF006400),
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("${"%.0f".format(total)}")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Black
+                        )
+                    ) {
+                        append(" NOK")
+                    }
+                }
+            )
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+
+        items.forEachIndexed { index, item ->
+            val title = item.photo.title
+            val artist = "${item.photo.artist.name} ${item.photo.artist.familyName}"
+            val frame = item.frameType.title
+            val size = "${item.size.size.toInt()} cm"
+
+            Text(
+                buildAnnotatedString {
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Black
+                        )
+                    ) {
+                        append("${index + 1}. ") // 👈 Numbered counter
+                        append("Product: ")
+                    }
+
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color(0xFF006400)
+                        )
+                    ) {
+                        append("${item.photo.title}")
+                        append("\n")
+
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Black
+                            )
+                    ) {
+                        append("   Image Width: ")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Blue,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("%.1f ".format(widthInCm))
+                    }
+                    withStyle(
+                        SpanStyle(
+                            color = Color.Black,
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily
+                        )
+                    ) {
+                        append("cm²")
+                        append("\n")
+
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Black
+                            )
+                    ) {
+                        append("   Material: ")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Red
+                            )
+                    ) {
+                        append("${item.frameType.title}")
+                        append("\n")
+
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.Black
+                        )
+                    ) {
+                        append("  Artist: ")
+                    }
+                    withStyle(
+                        SpanStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = IBMVGAFontFamily,
+                            color = Color.DarkGray
+                        )
+                    ) {
+                        append("${item.photo.artist.name}")
+                        append(" ${item.photo.artist.familyName}")
+                    }
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 8.dp, bottom = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                    }
+                },
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
+        }
+
+
+        // 🟦 Pay Button
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 16.dp, bottom = 8.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Klar til å betale?",
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                fontFamily = IBMVGAFontFamily,
+                color = Color.Black
+            )
+        }
+>>>>>>> main
 
         Button(
             onClick = {

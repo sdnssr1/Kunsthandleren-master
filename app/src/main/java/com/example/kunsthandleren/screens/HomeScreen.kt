@@ -152,9 +152,25 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+<<<<<<< HEAD
         Text("Antall bilder valgt: ${items.count()}",
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp
+=======
+        Text(
+            buildAnnotatedString {
+                withStyle(SpanStyle(
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    )) {
+                    append("Handle kurv: ")
+                }
+                withStyle (SpanStyle(color = Color.Red, fontSize = 24.sp))
+                {
+                    append("${items.count()}")
+                }
+            },
+>>>>>>> main
         )
         Text("Totalpris: $totalCost",
             fontWeight = FontWeight.Bold,
@@ -169,7 +185,7 @@ fun HomeScreen(
                 containerColor = Color.Black,
                 contentColor = Color.White
             ),
-            shape = RoundedCornerShape(50),
+            shape = RoundedCornerShape(100),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
@@ -185,6 +201,6 @@ fun HomeScreen(
                 )
             )
         }
-
     }
 }
+

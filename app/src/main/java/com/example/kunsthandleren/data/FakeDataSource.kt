@@ -36,6 +36,7 @@ object DataSource {
         Photo(6L, "Nature Image 6", R.drawable.android_superhero6, artists[2], Category.FOOD, 150f)
     )
     val animalPhotos: List<Photo> = listOf(
+<<<<<<< HEAD
         Photo(4L, "animal Image 1", R.drawable.faye, artists[3], Category.DYR, 130f),
         Photo(5L, "animal Image 2", R.drawable.frankie, artists[3], Category.DYR, 140f),
         Photo(6L, "animal Image 3", R.drawable.koda, artists[3], Category.DYR, 150f),
@@ -44,6 +45,18 @@ object DataSource {
         Photo(9L, "animal Image 6", R.drawable.moana, artists[3], Category.DYR, 150f),
         Photo(10L, "animal Image 7", R.drawable.nox, artists[3], Category.DYR, 150f),
         Photo(11L, "animal Image 8", R.drawable.tzeitel, artists[3], Category.DYR, 150f)
+=======
+        Photo(1L, "Faye", R.drawable.faye, artists[3], Category.ANIMAL, 130f),
+        Photo(2L, "Frankie", R.drawable.frankie, artists[3], Category.ANIMAL, 140f),
+        Photo(3L, "Koda", R.drawable.koda, artists[3], Category.ANIMAL, 150f),
+        Photo(4L, "Leroy", R.drawable.leroy, artists[3], Category.ANIMAL, 150f),
+        Photo(5L, "Lola", R.drawable.lola, artists[3], Category.ANIMAL, 150f),
+        Photo(6L, "Mona", R.drawable.moana, artists[3], Category.ANIMAL, 150f),
+        Photo(7L, "Nox", R.drawable.nox, artists[3], Category.ANIMAL, 150f),
+        Photo(8L, "Tz", R.drawable.tzeitel, artists[3], Category.ANIMAL, 150f),
+        Photo(9L, "sheep", R.drawable.tzeitel, artists[3], Category.ANIMAL, 150f)
+
+>>>>>>> main
     )
     val paintingPhotos: List<Photo> = listOf(
         Photo(4L, "Nature Image 4", R.drawable.paint1, artists[0], Category.PAINT, 130f),
@@ -77,8 +90,13 @@ data class Artist(
 
 enum class Category {
     NATURE(),
+<<<<<<< HEAD
     FOOD(),
     DYR(),
+=======
+    SUPERHERO(),
+    ANIMAL(),
+>>>>>>> main
     PAINT()
 }
 
@@ -95,7 +113,7 @@ enum class FrameType(
 ) {
     WOOD("Wood", 10f, Color(0xFF8B4513), R.drawable.wood_texture),
     METAL("Metal", 15f, Color.Gray, R.drawable.metal_texture),
-    NICE("Nice", 20f, Color(0xFFDAA520), R.drawable.nice_texture),
+    NICE("Nice", 10f, Color(0xFFDAA520), R.drawable.nice_texture),
     GOLD("Gold", 10f, Color.Yellow, R.drawable.gold_texture),
 }
 

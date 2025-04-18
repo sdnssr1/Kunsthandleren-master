@@ -27,16 +27,6 @@ class ArtVendorViewModel: ViewModel() {
         }
     }
 
-    fun deleteFromPurchaseItem(purchaseItemId: Long){
-        _uiState.update {
-                currentState ->
-            val purchaseItemList = currentState.purchaseItemList.filter { purchaseItem -> purchaseItem.photo.id != purchaseItemId }
-            currentState.copy(purchaseItemList = purchaseItemList)
-
-        }
-        Log.i("PURCHASEITEMLIST", uiState.value.purchaseItemList.count().toString())
-    }
-
     fun updateChosenFilter(filter: Filters){
         _uiState.update {
             currentState ->
