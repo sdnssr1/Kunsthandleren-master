@@ -15,12 +15,32 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import androidx.lifecycle.viewModelScope
+import com.example.kunsthandleren.data.ArtRepository
+import kotlinx.coroutines.launch
+
 
 class ArtVendorViewModel: ViewModel() {
 
 
     private val _uiState = MutableStateFlow(ArtPurchaseUiState())
     val uiState: StateFlow<ArtPurchaseUiState> = _uiState.asStateFlow()
+    private val repository = ArtRepository()
+
+    init {
+        viewModelScope.launch {
+            val artistDtos = repository.getArtists()
+            val artists = artistDtos.map { Artist(it.id.toLong(), it.firstName, it.lastName) }
+            _uiState.update { it.copy(artistList = artists) }
+        }
+
+        viewModelScope.launch {
+            val categoryDtos = repository.getCategories()
+            val categories = categoryDtos.map { Category.valueOf(it.name.uppercase()) }
+            _uiState.update { it.copy(categoryList = categories) }
+        }
+    }
+
 
     var selectedWidthInCm by mutableStateOf(0f)
         private set

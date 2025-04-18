@@ -156,7 +156,9 @@ fun ArtVendorApp(
             composable(route = ArtVendorScreen.Filter.name) {
                 FilterScreen(
                     filterContent = if (uiState.chosenFilter == Filters.ARTIST)
-                        DataSource.artists else DataSource.categories,
+                        uiState.artistList else uiState.categoryList
+
+,
                     onNextButtonClicked = { chosen ->
                         navController.navigate(ArtVendorScreen.Images.name)
                         viewModel.updateChosenArtistOrCategory(chosen)

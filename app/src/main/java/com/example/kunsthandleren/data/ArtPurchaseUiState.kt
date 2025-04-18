@@ -9,6 +9,8 @@ import com.example.kunsthandleren.testPhoto
 
 data class ArtPurchaseUiState (
     val price: Float = 0f,
+    val artistList: List<Artist> = emptyList(),
+    val categoryList: List<Category> = emptyList(),
 
     val chosenFilter: Filters? = null,
     val chosenArtist: Artist? = null,
