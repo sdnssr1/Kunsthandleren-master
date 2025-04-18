@@ -147,7 +147,7 @@ fun HomeScreen(
                 containerColor = Black,
                 contentColor = Color.White
             ),
-            shape = RoundedCornerShape(50),
+            shape = RoundedCornerShape(100),
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
@@ -161,6 +161,6 @@ fun HomeScreen(
                 )
             )
         }
-
     }
 }
+
